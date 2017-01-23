@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exercise 3 CGS3850</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+	
+		// Request the name of the employee
+		var employeeName = prompt("What is your name");
+		
+		// Request number of hours worked.
+		var numberOfHours = prompt(employeeName + 
+				", how many hours did you work this week?");
+		
+		// Request the hourly rate of the employee.
+		var hourlyEmployeeRate = prompt(employeeName +
+				", what is your hourly rate?");
+	
+		// Output the data inputed.
+		document.write("<p><strong>Summary of input:</strong></p>" +
+				"Employee Name: " + employeeName +
+				"<br>Hours Worked: " + numberOfHours + 
+				"<br>Hourly Rate: $" + Number(hourlyEmployeeRate).toFixed(2) + " per hour");
+		
+		// Variable to calculate hours worked and hours over 40.
+		var hoursOverForty = 0;
+		
+		// Function that determines if the hours worked is over 40.
+		// Sets how many hours over 40.
+		function overForty (hoursWorked) {
+			if (hoursWorked > 40) {
+				hoursOverForty = hoursWorked - 40;
+				//alert("Overtime hours: " + hoursOverForty);
+			} else {
+				//alert("No overtime hours: " + hoursOverForty);
+			}
+		}
+		
+		// Function to Print the results once the pay is calculated.
+		function printEmployeePayResults (name, basePay, overTimePay){
+			
+			document.write("<p><h1>Calculate Pay</h1></p>");
+			
+			document.write("<p>" + name + ", your base pay this week is: $" + 
+					basePay.toFixed(2) + "<br>");
+			
+			document.write("and your overtime pay is: $" + 
+					overTimePay.toFixed(2) + "</p>");
+			document.write("Your total pay is: $" + (basePay+overTimePay).toFixed(2));
+		}
+		
+		
+		// Call Function to calculate the pay rate.
+		function calculatePay(name, hours, rate){
+			
+			// Call Function to see if there were overtime hours.
+			overForty(hours);
+			
+			// Set variable for basePay and overTimePay
+			var basePay = 0;
+			var overTimePay = 0;
+			
+			
+			
+			// Calculate payment depending on if the employee
+			// worked more than 40 hours. 
+			if (hours > 40){
+				basePay = (40*rate);
+				overTimePay = ((rate*1.5)*hoursOverForty);
+				
+			} else {
+				basePay = hours*rate;
+				
+			}
+			
+			printEmployeePayResults(name, basePay, overTimePay);
+			
+		}
+		
+		//alert(Number(hourlyEmployeeRate).toFixed(2));
+		
+		calculatePay(employeeName, Number(numberOfHours), Number(hourlyEmployeeRate));
+		
+	
+	</script>
+
+</body>
+</html>
